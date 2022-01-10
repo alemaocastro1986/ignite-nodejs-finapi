@@ -1,0 +1,67 @@
+@hostname = http://localhost
+@port = 5000
+@host = {{hostname}}:{{port}}/api
+@contentType = application/json
+
+
+### CREATE ACCOUNT
+POST {{host}}/account HTTP/1.1
+Content-Type:  {{contentType}}
+
+{
+  "cpf": "999999999",
+  "name": "Jane Doe"
+}
+
+### SHOW ACCOUNT
+GET {{host}}/account HTTP/1.1
+Content-Type:  {{contentType}}
+cpf: 999999999
+
+
+### UPDATE ACCOUNT
+PUT {{host}}/account HTTP/1.1
+Content-Type:  {{contentType}}
+cpf: 88888888888
+
+{
+  "name": "John The Doe"
+}
+
+### REMOVE ACCOUNT
+DELETE  {{host}}/account HTTP/1.1
+Content-Type:  {{contentType}}
+cpf: 999999999
+
+
+
+
+### GET STATEMENTS
+GET {{host}}/statement HTTP/1.1
+Content-Type:  {{contentType}}
+cpf: 88888888888
+
+### GET STATEMENTS BY DATE
+GET {{host}}/statement/date 
+?date=2022-01-10
+Content-Type:  {{contentType}}
+cpf: 88888888888
+
+### CREATE DEPOSIT
+POST {{host}}/deposit HTTP/1.1
+Content-Type:  {{contentType}}
+cpf: 88888888888
+
+{
+  "description": "Desenvolvimento api",
+  "amount": 3000
+}
+
+### CREATE WITHDRAW
+POST {{host}}/withdraw HTTP/1.1
+cpf: 88888888888
+Content-Type:  {{contentType}}
+
+{
+  "amount": 300
+}
