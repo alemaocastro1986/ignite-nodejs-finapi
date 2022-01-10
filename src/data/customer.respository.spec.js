@@ -81,6 +81,14 @@ describe("CustomerRepository", () => {
     );
   });
 
+  it("should not update client, when id is invalid ", async () => {
+    await repository.update("anything", {
+      name: "Jane Doe updated",
+    });
+
+    expect(database.write).not.toBeCalled();
+  });
+
   it("should return true, when customer is removed.", async () => {
     const sut = await repository.destroy(
       "7a0ca079-faea-49a0-8b3f-6267415b176a"
@@ -89,5 +97,11 @@ describe("CustomerRepository", () => {
     const sut2 = await repository.listAll();
     expect(sut).toBeTruthy();
     expect(sut2).toHaveLength(2);
+  });
+
+  it("should return false, when customer is removed.", async () => {
+    const sut = await repository.destroy("invalid id");
+
+    expect(sut).toBeFalsy();
   });
 });
